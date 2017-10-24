@@ -1,0 +1,7 @@
+wlan0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+        RX packets 1316404  bytes 1718496942 (1.6 GiB)
+        RX errors 0  dropped 650  overruns 0  frame 0
+        TX packets 857627  bytes 108263027 (103.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
