@@ -21,32 +21,35 @@ echo -e "Instalando o BRscript..."
 sleep 1
 echo -e "Dando permissões"
 sleep 2
-chmod +x /root/brscript/lh1
-chmod +x /root/brscript/lh2
-chmod +x /root/brscript/lh3
-chmod +x /root/brscript/lh31
-chmod +x /root/brscript/l
-chmod +x /root/brscript/lh4
-chmod +x /root/brscript/lh41
-chmod +x /root/brscript/lh42
-chmod +x /root/brscript/lh43
-chmod +x /root/brscript/l131.sh
-chmod +x /root/brscript/l132.sh
-chmod +x /root/brscript/l133.sh
+chmod +x /root/brscript/br1
+chmod +x /root/brscript/br2
+chmod +x /root/brscript/br3
+chmod +x /root/brscript/br31
+chmod +x /root/brscript/b
+chmod +x /root/brscript/br4
+chmod +x /root/brscript/br41
+chmod +x /root/brscript/br42
+chmod +x /root/brscript/br43
+chmod +x /root/brscript/b131.sh
+chmod +x /root/brscript/b132.sh
+chmod +x /root/brscript/b133.sh
 chmod +x /root/brscript/uninstall.sh
-echo -e "Copiando o script para /bin/"
+echo -e "Copiando o script para /bin"
 sleep 1
-mkdir /bin/brscript
 cd /root/brscript
-cp /root/brscript/l /bin/
-cp /root/brscript/lh1 /bin/
-cp /root/brscript/lh2 /bin/
-cp /root/brscript/lh3 /bin/
-cp /root/brscript/lh31 /bin/
-cp /root/brscript/lh4 /bin/
-cp /root/brscript/lh41 /bin/
-cp /root/brscript/lh42 /bin/
-cp /root/brscript/lh43 /bin/
+cp /root/brscript/b /bin/
+cp /root/brscript/br1 /bin/
+cp /root/brscript/br2 /bin/
+cp /root/brscript/br3 /bin/
+cp /root/brscript/br31 /bin/
+cp /root/brscript/br4 /bin/
+cp /root/brscript/br41 /bin/
+cp /root/brscript/br42 /bin/
+cp /root/brscript/br43 /bin/
+cp /root/brscript/b131.sh
+cp /root/brscript/b132.sh
+cp /root/brscript/b133.sh
+cp /root/brscript/uninstall.sh
 if [[ ! -d /root/handshakes ]]
 then
 	mkdir /root/handshakes
@@ -63,34 +66,34 @@ else
 fi
 while true
 do
-echo -e "Você está \e[1;33ma\e[0mtualizando ou \e[1;33mi\e[0mnstalando o script?(\e[1;33ma\e[0m/\e[1;33mi\e[0m): "
-echo -e "Apenas use 'i' na primeira vez."
+echo -e "Você está \e[1;33mA\e[0mtualizando ou \e[1;33mI\e[0mnstalando o script?(\e[1;33mA\e[0m/\e[1;33mI\e[0m): "
+echo -e "Apenas use 'I' na primeira vez."
 read UORI
-if [[ "$UORI" = "a" ]]
+if [[ "$UORI" = "A" ]]
 then 
 	echo -e "Digite 'changelog' para ver o que tem de novo nessa versão."
 	sleep 3
 	break
-elif [[ "$UORI" = "i" ]]
+elif [[ "$UORI" = "I" ]]
 then
 	BASHCHECK=$(cat ~/.bashrc | grep "bin/brscript")
 	if [[ "$BASHCHECK" != "" ]]
 	then
-		echo -e "EU DISSE, USE, SOMENTE, UMA VEZ..........."
+		echo -e "EU, DISSE, USE, SOMENTE, UMA VEZ..."
 		sleep 3
 	fi
-	echo -e "Adicionando brscript para PATH para que você possa acessá-lo de qualquer lugar"
+	echo -e "Adicionando o brscript no PATH para que você possa acessá-lo de qualquer lugar"
 	sleep 1
-	export PATH=/bin/brscript:$PATH
+	export PATH=/bin:$PATH
 	sleep 1
-	echo "exportando PATH=/bin/brscript:$PATH" >> ~/.bashrc
+	echo "exportando PATH=/bin:$PATH" >> ~/.bashrc
 	sleep 1
 	break
 fi
 done
 echo -e "Pronto"
 sleep 1
-echo -e "Abra uma nova sessão e digite "l" para iniciar"
+echo -e "Abra uma nova sessão ou digite "b" para iniciar"
 sleep  4
 gnome-terminal -e l
 exit

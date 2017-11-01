@@ -69,9 +69,9 @@ function defaults_l
 		COL="$RS"
 	fi
 #colocando stings frequentes
-	YNYES="("$YS"y"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=yes)"
-	YNNO="("$YS"y"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=no)"
-	YNONLY="("$YS"y"$CE"/"$YS"n"$CE")"
+	YNYES="("$YS"s"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=sim)"
+	YNNO="("$YS"s"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=não)"
+	YNONLY="("$YS"s"$CE"/"$YS"n"$CE")"
 	PAKT="Pressione "$YS"qualquer tecla$CE para"
 	PAKTC="Pressione "$YS"qualquer tecla$CE para continuar..."
 	PAKTGB="Pressione "$YS"qualquer tecla$CE para voltar"
@@ -255,12 +255,13 @@ function banner
 {
 	check_wlans
 	echo -e ""
-	echo -e "$COL         ██████╗ ██████╗     ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗$CE v$VERSION"
-    echo -e "$COL         ██╔══██╗██╔══██╗    ██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝$CE"
-    echo -e "$COL         ██████╔╝██████╔╝    ███████╗██║     ██████╔╝██║██████╔╝   ██║   $CE   by "$COL"BRUNO ROCHA$CE"
-    echo -e "$COL         ██╔══██╗██╔══██╗    ╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   $CE"
-    echo -e "$COL    THE  ██████╔╝██║  ██║    ███████║╚██████╗██║  ██║██║██║        ██║   $CE"
-    echo -e "$COL         ╚═════╝ ╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   $CE"
+
+	echo -e "$COL      ██████╗ ██████╗     ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗    $CE v$VERSION"
+    echo -e "$COL THE  ██╔══██╗██╔══██╗    ██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝    $CE"
+    echo -e "$COL      ██████╔╝██████╔╝    ███████╗██║     ██████╔╝██║██████╔╝   ██║       $CE by "$COL"BRUNO ROCHA$CE"
+    echo -e "$COL      ██╔══██╗██╔══██╗    ╚════██║██║     ██╔══██╗██║██╔═══╝    ██║       $CE"
+    echo -e "$COL      ██████╔╝██║  ██║    ███████║╚██████╗██║  ██║██║██║        ██║       $CE"
+    echo -e "$COL      ╚═════╝ ╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝       $CE"
 	echo -e ""$YS"if"$CE") Ifconfig  "$YS"l"$CE") IPs locais & gateways "$RS"|"$CE"  "$YS"scan"$CE") Arp-scan na rede"
 	if [[ "$WLANCHECKING" = "" ]]
 	then
@@ -5909,7 +5910,7 @@ function new_terminal
 				sleep 1
 				FJC=0
 				export FJC
-				gnome-terminal --geometry 87x35+9999+0 -- lh1
+				gnome-terminal --geometry 87x35+9999+0 -- br1
 				sleep 1
 				exec bash "$0"
 				break
@@ -5918,7 +5919,7 @@ function new_terminal
 				clear
 				echo -e "Moving into new terminal..."
 				sleep 1
-				gnome-terminal --geometry 80x25+9999+0 -- lh3
+				gnome-terminal --geometry 80x25+9999+0 -- br3
 				sleep 1
 				exec bash "$0"
 				break
@@ -5926,7 +5927,7 @@ function new_terminal
 			then
 				echo -e "Moving into new terminal..."
 				sleep 1
-				gnome-terminal --geometry 80x25+9999+0 -- lh4
+				gnome-terminal --geometry 80x25+9999+0 -- br4
 				sleep 1
 				exec bash "$0"
 				break
