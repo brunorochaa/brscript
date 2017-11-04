@@ -46,10 +46,10 @@ cp /root/brscript/br4 /bin/
 cp /root/brscript/br41 /bin/
 cp /root/brscript/br42 /bin/
 cp /root/brscript/br43 /bin/
-cp /root/brscript/b131.sh
-cp /root/brscript/b132.sh
-cp /root/brscript/b133.sh
-cp /root/brscript/uninstall.sh
+cp /root/brscript/b131.sh /bin
+cp /root/brscript/b132.sh /bin
+cp /root/brscript/b133.sh /bin
+cp /root/brscript/uninstall.sh /bin
 if [[ ! -d /root/handshakes ]]
 then
 	mkdir /root/handshakes
