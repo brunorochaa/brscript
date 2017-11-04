@@ -255,26 +255,27 @@ function banner
 {
 	check_wlans
 	echo -e ""
-
-	echo -e "$COL     ██████╗ ██████╗     ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗ $CE"
-    echo -e "$COL THE ██╔══██╗██╔══██╗    ██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝ $CE"
-    echo -e "$COL     ██████╔╝██████╔╝    ███████╗██║     ██████╔╝██║██████╔╝   ██║    $CE"
-    echo -e "$COL     ██╔══██╗██╔══██╗    ╚════██║██║     ██╔══██╗██║██╔═══╝    ██║    $CE"
-    echo -e "$COL     ██████╔╝██║  ██║    ███████║╚██████╗██║  ██║██║██║        ██║    $CE"
-    echo -e "$COL     ╚═════╝ ╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝    $CE"
-	echo -e "$COL                   v$VERSION   by "$COL"BRUNO ROCHA                   $CE"
-	echo -e "$COL                                                                      $CE"
-	echo -e ""$YS"if"$CE") Ifconfig "$YS"l"$CE") IP local & Gateways "$RS"|"$CE"  "$YS"scan"$CE") Arp-scan na rede"
+	echo -e "$COL       ____  ____                _       _     $CE"
+	echo -e "$COL      | __ )|  _ \ ___  ___ _ __(_)_ __ | |_   $CE"
+    echo -e "$COL THE  |  _ \| |_) / __|/ __| '__| | '_ \| __|  $CE"
+    echo -e "$COL      | |_) |  _ <\__ \ (__| |  | | |_) | |_   $CE"
+    echo -e "$COL      |____/|_| \_\___/\___|_|  |_| .__/ \__|  $CE"
+    echo -e "$COL                                  |_|          $CE"
+	echo -e "$COL       v$VERSION   by "$COL"BRUNO ROCHA        $CE"
+	echo -e ""
+	echo -e ""$YS" if"$CE") Ifconfig"
+	echo -e ""$YS" ip"$CE") IP local & Gateways"
+	echo -e ""$YS" scan"$CE") Arp-scan na rede"
+	echo -e ""
 	if [[ "$WLANCHECKING" = "" ]]
 	then
-		echo -e ""$RS" 1"$CE") Ativar "$RS"$WLANN"$CE"${SPACESN}"$RS"d1"$CE") Desativar "$RS"$WLANN"$CE"${SPACESN}  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
-		echo -e ""$RS" 2"$CE") Ativar "$RS"$WLANNM"$CE"${SPACESM}"$RS"d2"$CE") Desativar "$RS"$WLANNM"$CE"${SPACESM}  "$RS"|"$CE"  "$YS"stop"$CE") Parar modo monitor"
+		echo -e ""$RS" 1"$CE") Ativar "$RS"$WLANN"$CE"  - "$RS"d1"$CE") Desativar "$RS"$WLANN"$CE"  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
+		echo -e ""$RS" 2"$CE") Ativar "$RS"$WLANNM"$CE" - "$RS"d2"$CE") Desativar "$RS"$WLANNM"$CE" "$RS"|"$CE" "$YS"stop"$CE")  Parar modo monitor"
 	else
-		echo -e ""$YS" 1"$CE") Ativar $WLANN${SPACESN}"$YS"d1"$CE") Desativar $WLANN${SPACESN}  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
-		echo -e ""$YS" 2"$CE") Ativar $WLANNM${SPACESM}"$YS"d2"$CE") Desativar $WLANNM${SPACESM}  "$RS"|"$CE"  "$YS"stop"$CE") Parar modo monitor"
+		echo -e ""$YS" 1"$CE") Ativar $WLANN$  "$YS"d1"$CE") Desativar $WLANN$  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
+		echo -e ""$YS" 2"$CE") Ativar $WLANNM$ "$YS"d2"$CE") Desativar $WLANNM$ "$RS"|"$CE" "$YS"stop"$CE")  Parar modo monitor"
 	fi
-	echo -e ""$YS" 3"$CE") Alterar MAC"
-	echo -e ""$YS"d3"$CE") Restaurar MAC original"
+	echo -e ""$YS" 3"$CE") Alterar MAC" - ""$YS"d3"$CE") Restaurar MAC original"
 	echo -e ""$YS"update"$CE") Procurar atualizações"
 	if [[ -f /usr/bin/anonym8 ]]
 	then

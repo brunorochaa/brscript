@@ -18,7 +18,7 @@ then
 	gnome-terminal -e "bash /root/brscript/install.sh"
 fi
 echo -e "Instalando o BRscript..."
-sleep 1
+sleep 2
 echo -e "Dando permissões"
 sleep 2
 chmod +x /root/brscript/br1
@@ -35,7 +35,7 @@ chmod +x /root/brscript/b132.sh
 chmod +x /root/brscript/b133.sh
 chmod +x /root/brscript/uninstall.sh
 echo -e "Copiando o script para /bin"
-sleep 1
+sleep 2
 cd /root/brscript
 cp /root/brscript/b /bin/
 cp /root/brscript/br1 /bin/
@@ -95,5 +95,4 @@ echo -e "Pronto"
 sleep 1
 echo -e "Abra uma nova sessão ou digite "b" para iniciar"
 sleep  4
-gnome-terminal -e l
 exit
