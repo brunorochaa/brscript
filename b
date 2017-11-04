@@ -278,21 +278,21 @@ function banner
 	echo -e ""$YS"update"$CE") Procurar atualizações"
 	if [[ -f /usr/bin/anonym8 ]]
 	then
-	echo -e ""$YS" 4"$CE") Ativar anonym8    "$YS"d4"$CE") Desativar anonym8      "$RS"|"$CE""$YS"errors"$CE") Corrigir possíveis erros"
+	echo -e ""$YS" 4"$CE") Ativar anonym8 - "$YS"d4"$CE") Desativar anonym8     "$RS"|"$CE" "$YS" errors"$CE") Corrigir possíveis erros"
 	else
-	echo -e ""$RS" 4"$CE") Ativar anonym8    "$RS"d4"$CE") Desativar anonym8      "$RS"|"$CE""$YS"errors"$CE") Corrigir possíveis erros"
+	echo -e ""$RS" 4"$CE") Ativar anonym8 - "$RS"d4"$CE") Desativar anonym8     "$RS"|"$CE" "$YS" errors"$CE") Corrigir possíveis erros"
 	fi
 	if [[ -f /usr/bin/anonsurf ]]
 	then
-	echo -e ""$YS" 5"$CE") Ativar anonsurf   "$YS"d5"$CE") Desativar anonsurf     "$RS"|"$CE"    "$YS"ks"$CE") Atalhos do teclado"
-	echo -e ""$YS" 6"$CE") Anonsurf's status "$YS"d6"$CE") Reiniciar anonsurf     "$RS"|"$CE""$YS"     d"$CE") Me pague um refri"
+	echo -e ""$YS" 5"$CE") Ativar anonsurf - "$YS"d5"$CE") Desativar anonsurf   "$RS"|"$CE" "$YS" ks"$CE") Atalhos do teclado"
+	echo -e ""$YS" 6"$CE") Anonsurf's status - "$YS"d6"$CE") Reiniciar anonsurf "$RS"|"$CE" "$YS" d"$CE") Me paga um lanche"
 	else
-	echo -e ""$RS" 5"$CE") Ativar anonsurf   "$RS"d5"$CE") Desativar anonsurf     "$RS"|"$CE"    "$YS"ks"$CE") Atalhos do teclado"
-	echo -e ""$RS" 6"$CE") Anonsurf's status "$RS"d6"$CE") Reiniciar anonsurf     "$RS"|"$CE"     "$YS"d"$CE") Me pague um refri"
+	echo -e ""$RS" 5"$CE") Ativar anonsurf - "$RS"d5"$CE") Desativar anonsurf   "$RS"|"$CE" "$YS"ks"$CE") Atalhos do teclado"
+	echo -e ""$RS" 6"$CE") Anonsurf's status "$RS"d6"$CE") Reiniciar anonsurf   "$RS"|"$CE" "$YS"d"$CE") Me pague um refri"
 	fi
-	echo -e ""$YS" 7"$CE") Mostar o seu IP público                             "$RS"|"$CE"     "$YS"s"$CE") Ir para menu de configurações"
+	echo -e ""$YS" 7"$CE") Mostar o seu IP público                              "$RS"|"$CE"     "$YS"s"$CE") Ir para menu de configurações"
 	echo -e ""$YS" 8"$CE") Ver MAC"
-	echo -e ""$YS" 9"$CE") FERRAMENTAS             "$YS"15"$CE") Spoof EMAIL (EM MODO BETA)"
+	echo -e ""$YS" 9"$CE") FERRAMENTAS             "$YS"15"$CE") Spoof EMAIL (MODO BETA)"
 	if [[ -f /root/ngrok ]]
 	then
 		echo -e ""$YS"10"$CE") Handshake         "$YS"16"$CE") Ngrok modo porta reversa"
