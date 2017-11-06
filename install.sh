@@ -21,31 +21,31 @@ echo -e "Instalando brscript..."
 sleep 1
 echo -e "Concedendo permissões"
 sleep 2
-chmod +x /root/brscript/lh1
-chmod +x /root/brscript/lh2
-chmod +x /root/brscript/lh3
-chmod +x /root/brscript/lh31
-chmod +x /root/brscript/l
-chmod +x /root/brscript/lh4
-chmod +x /root/brscript/lh41
-chmod +x /root/brscript/lh42
-chmod +x /root/brscript/lh43
-chmod +x /root/brscript/ls/l131.sh
-chmod +x /root/brscript/ls/l132.sh
-chmod +x /root/brscript/ls/l133.sh
+chmod +x /root/brscript/br1
+chmod +x /root/brscript/br2
+chmod +x /root/brscript/br3
+chmod +x /root/brscript/br31
+chmod +x /root/brscript/b
+chmod +x /root/brscript/br4
+chmod +x /root/brscript/br41
+chmod +x /root/brscript/br42
+chmod +x /root/brscript/br43
+chmod +x /root/brscript/bl131.sh
+chmod +x /root/brscript/b132.sh
+chmod +x /root/brscript/b133.sh
 chmod +x /root/brscript/uninstall.sh
 echo -e "Copiando o script para /bin"
 sleep 1
-cd /root/lscript
-cp /root/lscript/l /bin/
-cp /root/lscript/lh1 /bin/
-cp /root/lscript/lh2 /bin/
-cp /root/lscript/lh3 /bin/
-cp /root/lscript/lh31 /bin/
-cp /root/lscript/lh4 /bin/
-cp /root/lscript/lh41 /bin/
-cp /root/lscript/lh42 /bin/
-cp /root/lscript/lh43 /bin/
+cd /root/bscript
+cp /root/brscript/b /bin/
+cp /root/brscript/br1 /bin/
+cp /root/brscript/br2 /bin/
+cp /root/brscript/br3 /bin/
+cp /root/brscript/br31 /bin/
+cp /root/brscript/br4 /bin/
+cp /root/brscript/br41 /bin/
+cp /root/brscript/br42 /bin/
+cp /root/brscript/br43 /bin/
 if [[ ! -d /root/handshakes ]]
 then
 	mkdir /root/handshakes
