@@ -1,97 +1,97 @@
 #! /bin/bash
 VERSION=2.1.3
-#Number of tools with keyboard shortcut support
+#Número de ferramentas com suporte a atalho de teclado
 HOWMANYTOOLS=45
 BACKL="0"
 DONATIONS=3
 LATESTCHANGELOGLINES=22
 cd
-#############DEFAULTS###############
+#############PADRÕES###############
 function defaults_l
 {
-#path for lscript
-	LPATH="/root/lscript"
+#caminho para o brscript
+	LPATH="/root/brscript"
 	export LPATH
-#path for keyboard shortcuts
+#caminho para atalhos de teclado
 	KSPATH=""$LPATH"/ks"
 	export KSPATH
-#making sure the kspath is set
+#certificando-se de que o kspath está configurado
 	if [[ ! -d "$KSPATH" ]]
 	then
 		mkdir "$KSPATH"
 	fi
-#ALFA SUPPORT SETTING
+#CONFIGURAÇÃO DE APOIO ALFA
 	if [[ -f "$LPATH"/settings/AWUS036ACH.txt ]]
 	then
 		read ALFA < "$LPATH"/settings/AWUS036ACH.txt
 	else
 		ALFA="no"
 	fi
-#yellow start 
+#início amarelo
 	YS="\e[1;33m"
-#blue start 
+#início azul 
 	BS="\e[0;34m"
-#color end
+#fim de cor
 	CE="\e[0m"
-#red start
+#início vermelho
 	RS="\e[1;31m"
-#black start
+#começo preto
 	BLS="\e[0;30m"
-#dark gray start
+#início cinza escuro
 	DGYS="\e[1;30m"
-#light blue start
+#início azul claro
 	LBS="\e[1;34m"
-#green start
+#começo verde
 	GNS="\e[0;32m"
-#light green start
+#início verde claro
 	LGNS="\e[1;32m"
-#cyan start
+#início ciano
 	CYS="\e[0;36m"
-#light cyan start
+#início ciano claro
 	LCYS="\e[1;36m"
-#light red start
+#início vermelho claro
 	DRS="\e[0;31m"
-#purple start
+#começo roxo
 	PS="\e[0;35m"
-#light purple start
+#início do roxo claro
 	LPS="\e[1;35m"
-#brown start
+#início marrom
 	BRS="\e[0;33m"
-#light gray start
+#início cinza claro
 	LGYS="\e[0;37m"
-#white start
+#começo branco
 	WHS="\e[1;37m"
-#setting custom color for logo
+#configuração de cor personalizada para o logotipo
 	if [[ -f "$LPATH"/settings/logocolor.txt ]]
 	then
 		read COL < "$LPATH"/settings/logocolor.txt
 	else
 		COL="$RS"
 	fi
-#setting frequent stings
-	YNYES="("$YS"y"$CE"/"$YS"n"$CE")("$YS"Enter"$CE"=yes)"
-	YNNO="("$YS"y"$CE"/"$YS"n"$CE")("$YS"Enter"$CE"=no)"
-	YNONLY="("$YS"y"$CE"/"$YS"n"$CE")"
+#colocando stings frequentes
+	YNYES="("$YS"s"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=sim)"
+	YNNO="("$YS"s"$CE"/"$YS"n"$CE")("$YS"Digite"$CE"=não)"
+	YNONLY="("$YS"s"$CE"/"$YS"n"$CE")"
 	PAKT="Pressione "$YS"qualquer tecla$CE para"
 	PAKTC="Pressione "$YS"qualquer tecla$CE para continuar..."
-	PAKTGB="Pressione "$YS"qualquer tecla$CE para voltar..."
-	TNI=""$RS"Ferramenta não instalada. Para instalar digite '"$CE""$YS"install"$CE""$RS"'."$CE""
-#code to read from keyboard without return
+	PAKTGB="Pressione "$YS"qualquer tecla$CE para voltar"
+	TNI=""$RS"A ferramenta não está instalada. Para instalar digite'"$CE""$YS"install"$CE""$RS"'."$CE""
+#código para ler do teclado sem retorno
 	READAK="read -n 1"
-#default MAC when starting monitor
+#MAC padrão ao iniciar o monitor
 	DEFMAC="00:11:22:33:44:55"
 	
 	wififb="wififb"
 }
-##############FUNCTIONS#############
+##############FUNÇÕES#############
 function local_ips()
 {
 	iffile=""$LPATH"/iftemp.txt"
-	#passing an interface if any
+	#passando uma interface se houver
 	LF="$1"
 	if [[ "$LF" = "" ]]
 	then
-		echo -e ""$BS"Local IPs"$CE": "
+		echo -e ""$BS"IPs Locais"$CE": "
 		TEST=$(ifconfig | grep "$ETH:")
 		n=0
 		if [[ $TEST != "" ]]
@@ -131,7 +131,7 @@ function local_ips()
 		fi
 		if [[ "$n" = 0 ]]
 		then
-			echo -e ""$RS"No known interfaces found available"$CE""
+			echo -e ""$RS"Nenhuma interface conhecida disponível"$CE""
 		fi
 		echo -e ""
 		find_gateways
@@ -157,7 +157,7 @@ function give_ip_take_zero()
 	GI2="$2"
 	if [[ "$GI1" = "" ]]
 	then
-		echo -e ""$RS"Error 7. No parameters passed"$CE""
+		echo -e ""$RS"Erro 7. Nenhum parâmetro passou"$CE""
 		sleep 3
 	else
 		ip1=$(echo -e "$GI1" | cut -d '.' -f1)
@@ -178,7 +178,7 @@ function is_it_an_ip()
 	IIAI=${#IIA}
 	if [[ "$IIA" = "" ]]
 	then
-		echo -e ""$RS"Error 9. No parameteres passed"
+		echo -e ""$RS"Erro 9. Não foram passados ​​parâmetros"
 		sleep 2
 	else
 		if [[ "$IIAI" -le 15 && "$IIAI" -ge 7 ]]
@@ -193,15 +193,15 @@ function latest_changelog
 {
 	clear
 	printf '\033]2;LATEST CHANGELOG\a'
-	echo -e ""$BS"Wellcome to version $VERSION"$CE""
-	echo -e "What is included in this update: "
+	echo -e ""$BS"Bem vindo a versão $VERSION"$CE""
+	echo -e "O que está incluso nessa atualização: "
 	cat "$LPATH"/Changelog | head -n $LATESTCHANGELOGLINES
 	echo -e "$PAKTC"
 	$READAK
 }
 function finish 
 {
-  echo -e ""$RS"Hard kill detected.."$CE""
+  echo -e ""$RS"Modo extermínio detectado.."$CE""
 }
 function dash_calc
 {
@@ -269,46 +269,47 @@ function banner
 	echo -e ""
 	if [[ "$WLANCHECKING" = "" ]]
 	then
-		echo -e ""$RS" 1"$CE") Ativar "$RS"$WLANN"$CE"$ "$RS"d1"$CE") Desativar "$RS"$WLANN"$CE"$ "$YS"start"$CE") Iniciar modo monitor"
-		echo -e ""$RS" 2"$CE") Ativar "$RS"$WLANNM"$CE"$"$RS"d2"$CE") Desativar "$RS"$WLANNM"$CE"$ "$YS"stop"$CE") Parar modo monitor"
+		echo -e ""$RS" 1"$CE") Ativar "$RS"$WLANN"$CE"  - "$RS"d1"$CE") Desativar "$RS"$WLANN"$CE"  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
+		echo -e ""$RS" 2"$CE") Ativar "$RS"$WLANNM"$CE" - "$RS"d2"$CE") Desativar "$RS"$WLANNM"$CE" "$RS"|"$CE" "$YS"stop"$CE")  Parar modo monitor"
 	else
-		echo -e ""$YS" 1"$CE") Ativar $WLANN$  "$YS"d1"$CE") Desativar $WLANN$      "$YS"start"$CE") Iniciar modo monitor"
-		echo -e ""$YS" 2"$CE") Ativar $WLANNM$ "$YS"d2"$CE") Desativar $WLANNM$     "$YS"stop"$CE") Parar modo monitor"
+		echo -e ""$YS" 1"$CE") Ativar $WLANN$  "$YS"d1"$CE") Desativar $WLANN$  "$RS"|"$CE" "$YS"start"$CE") Iniciar modo monitor"
+		echo -e ""$YS" 2"$CE") Ativar $WLANNM$ "$YS"d2"$CE") Desativar $WLANNM$ "$RS"|"$CE" "$YS"stop"$CE")  Parar modo monitor"
 	fi
-	echo -e ""$YS" 3"$CE") Mudar endereço MAC  "$YS"d3"$CE") Restaurar MAC Original "$YS"update"$CE") Procurar atualizações"
+	echo -e ""$YS" 3"$CE") Alterar MAC" - ""$YS"d3"$CE") Restaurar MAC original"
+	echo -e ""$YS"update"$CE") Procurar atualizações"
 	if [[ -f /usr/bin/anonym8 ]]
 	then
-	echo -e ""$YS" 4"$CE") Ativar o anonym8    "$YS"d4"$CE") Desativar o anonym8    "$YS"errors"$CE") Corrigir erros"
+	echo -e ""$YS" 4"$CE") Ativar anonym8 - "$YS"d4"$CE") Desativar anonym8     "$RS"|"$CE" "$YS" errors"$CE") Corrigir possíveis erros"
 	else
-	echo -e ""$RS" 4"$CE") Ativar o anonym8    "$RS"d4"$CE") Desativar o anonym8    "$YS"errors"$CE") Corrigir erros"
+	echo -e ""$RS" 4"$CE") Ativar anonym8 - "$RS"d4"$CE") Desativar anonym8     "$RS"|"$CE" "$YS" errors"$CE") Corrigir possíveis erros"
 	fi
 	if [[ -f /usr/bin/anonsurf ]]
 	then
-	echo -e ""$YS" 5"$CE") Ativar o	anonsurf   "$YS"d5"$CE") Desativar o anonsurf  	"$YS"ks"$CE") Atalhos no teclado"
-	echo -e ""$YS" 6"$CE") Status do Anonsurf  "$YS"d6"$CE") Reiniciar o anonsurf   "$YS"d"$CE") Me paga um lanche!"
+	echo -e ""$YS" 5"$CE") Ativar anonsurf - "$YS"d5"$CE") Desativar anonsurf   "$RS"|"$CE" "$YS" ks"$CE") Atalhos do teclado"
+	echo -e ""$YS" 6"$CE") Anonsurf's status - "$YS"d6"$CE") Reiniciar anonsurf "$RS"|"$CE" "$YS" d"$CE") Me paga um lanche"
 	else
-	echo -e ""$RS" 5"$CE") Ativar anonsurf     "$RS"d5"$CE") Desatiovar o anonsurf  "$YS"ks"$CE") Keyboard shortucts"
-	echo -e ""$RS" 6"$CE") Status do Anonsurf  "$RS"d6"$CE") Reiniciar o anonsurf   "$YS"d"$CE") Me paga um lanche!"
+	echo -e ""$RS" 5"$CE") Ativar anonsurf - "$RS"d5"$CE") Desativar anonsurf   "$RS"|"$CE" "$YS"ks"$CE") Atalhos do teclado"
+	echo -e ""$RS" 6"$CE") Anonsurf's status "$RS"d6"$CE") Reiniciar anonsurf   "$RS"|"$CE" "$YS"d"$CE") Me pague um refri"
 	fi
-	echo -e ""$YS" 7"$CE") Mostrar seu IP público                                   "$YS"s"$CE") Ir para menu de configurações"
-	echo -e ""$YS" 8"$CE") Mostrar MAC"
-	echo -e ""$YS" 9"$CE") FERRAMENTAS                                              "$YS"15"$CE") Spoof EMAIL"
+	echo -e ""$YS" 7"$CE") Mostar o seu IP público                              "$RS"|"$CE"     "$YS"s"$CE") Ir para menu de configurações"
+	echo -e ""$YS" 8"$CE") Ver MAC"
+	echo -e ""$YS" 9"$CE") FERRAMENTAS             "$YS"15"$CE") Spoof EMAIL (MODO BETA)"
 	if [[ -f /root/ngrok ]]
 	then
-		echo -e ""$YS"10"$CE") Handshake                                            "$YS"16"$CE") Ngrok na porta reversa"
+		echo -e ""$YS"10"$CE") Handshake         "$YS"16"$CE") Ngrok modo porta reversa"
 	else
-		echo -e ""$YS"10"$CE") Handshake                                            "$RS"16"$CE") "$RS"Ngrok"$CE" na porta reversa"
+		echo -e ""$YS"10"$CE") Handshake         "$RS"16"$CE") "$RS"Ngrok"$CE" porta reversa"
 	fi
 	if [[ -f /usr/local/bin/howdoi ]]
 	then
-		echo -e ""$YS"11"$CE") Encontrar pin WPS                                    "$YS"17"$CE") Ask (Howdoi tool)"
+		echo -e ""$YS"11"$CE") Encontrar pin do WPS      "$YS"17"$CE") Perguntas (Howdoi tool)"
 	else
-		echo -e ""$YS"11"$CE") Encontrar pin WPS                                    "$RS"17"$CE") Ask ("$RS"Howdoi"$CE" tool)"
+		echo -e ""$YS"11"$CE") Encontrar pin do WPS      "$RS"17"$CE") Perguntas ("$RS"Howdoi"$CE" tool)"
 	fi
-	echo -e ""$YS"12"$CE") WEP hacking                                              "$YS"18"$CE") MNavegador Auto-exploit"
-	echo -e ""$YS"13"$CE") MITM                                                     "$YS"19"$CE") Geolocate an IP"
-	echo -e ""$YS"14"$CE") Metasploit"   
-	echo -e "                                     "$YS" 0"$CE") EXIT"
+	echo -e ""$YS"12"$CE") WEP hacking       "$YS"18"$CE") Navegador de Auto-exploit"
+	echo -e ""$YS"13"$CE") MITM              "$YS"19"$CE") Geolocar um IP"
+	echo -e ""$YS"14"$CE") Metasploit   "   
+	echo -e ""$YS" 0"$CE") SAIR"
 	echo "Escolha: "
 	read -e YORNAA
 	clear
@@ -318,13 +319,13 @@ function enable_wlan
 	O4=0
 	echo -e "Ativando $WLANN..."
 	rfkill unblock wifi &> /dev/null; rfkill unblock all &> /dev/null
-	ifconfig $WLANN up &>/dev/null && echo -e ""$YS"Pronto"$CE"" && O4=1  || echo -e ""$RS"Error. I can't find your wireless adapter"$CE""
+	ifconfig $WLANN up &>/dev/null && echo -e ""$YS"Pronto"$CE"" && O4=1  || echo -e ""$RS"Deu erro fiote. Não consigo encontrar o seu adaptador sem fio"$CE""
 }
 function disable_wlan
 {
 	echo -e "Desativando $WLANN..."
 	rfkill unblock wifi &> /dev/null; rfkill unblock all &> /dev/null
-	ifconfig $WLANN down &>/dev/null && echo -e ""$YS"Pronto"$CE"" && O4=1 || echo -e ""$RS"Error. I can't find your wireless adapter."$CE""
+	ifconfig $WLANN down &>/dev/null && echo -e ""$YS"Pronto"$CE"" && O4=1 || echo -e ""$RS"Deu erro fiote. Não consigo encontrar o seu adaptador sem fio"$CE""
 }
 function interface_selection
 {
@@ -372,10 +373,10 @@ elif [[ "$MYINT" = "3" ]]
 then
 	MYINT="$ETH"
 else
-echo -e "Wrong choice..."
+echo -e "Escolha errada..."
 sleep 2
 clear
-echo -e "EXITING"
+echo -e "SAINDO"
 sleep 1
 exec bash "$0"
 fi
@@ -387,27 +388,27 @@ function change_mac
 	clear
 	if [[ "$MYINT" = "OFF" ]]
 	then
-		echo -e "Interface not available"
+		echo -e "Interface não disponível"
 		sleep 2
 	else
-		echo -e "Change it to a random or specific?("$YS"r"$CE"/"$YS"s"$CE")("$YS"Enter"$CE"=r): "
+		echo -e "Mudar para um aleatório ou específico?("$YS"a"$CE"/"$YS"e"$CE")("$YS"Digite"$CE"=r): "
 		read -e RORS
 		clear
 		if [[ "$RORS" != "s" ]]
 		then
-			echo -e "Changing mac address of $MYINT to a random one..."
+			echo -e "Alterando o endereço MAC de $MYINT para um aleatório..."
 			ifconfig $MYINT down
 			macchanger -r $MYINT
 			ifconfig $MYINT up
-			echo -e "Done."
+			echo -e "Pronto."
 		else
-			echo -e "Enter the MAC you want:"
+			echo -e "Digite o MAC que você deseja:"
 			read -e SMAC
-			echo -e "Changing mac address of $MYINT to $SMAC..."
+			echo -e "Alterando o endereço MAC de $MYINT para $SMAC..."
 			ifconfig $MYINT down
 			macchanger -m $SMAC $MYINT
 			ifconfig $MYINT up
-			echo -e "Done."
+			echo -e "Pronto."
 		fi
 	fi
 }
@@ -416,19 +417,19 @@ function set_interface_number
 clear
 while true
 do
-echo -e "Enter the name of your wireless interface when in "$RS"managed"$CE" mode("$YS"Enter"$CE"=wlan0): "
+echo -e "Digite o nome da sua interface sem fio no modo "$RS"gerenciado"$CE"("$YS"Digite"$CE"=wlan0): "
 read MANAGED
 if [[ "$MANAGED" = "" ]]
 then
 	MANAGED="wlan0"
 fi
-echo -e "Enter the name of your wireless interface when in "$RS"monitor"$CE" mode("$YS"Enter"$CE"=wlan0mon): "
+echo -e "Digite o nome da sua interface sem fio no modo "$RS"monitor"$CE"("$YS"Digite"$CE"=wlan0mon): "
 read MONITOR
 if [[ "$MONITOR" = "" ]]
 then
 	MONITOR="wlan0mon"
 fi
-echo -e "Enter the name of your wired interface("$YS"Enter"$CE"="eth0"): "
+echo -e "Digite o nome da sua interface com fio("$YS"Digite"$CE"="eth0"): "
 read WIRED
 if [[ "$WIRED" = "" ]]
 then
@@ -437,10 +438,10 @@ fi
 	echo "$MANAGED" > "$LPATH"/wlan.txt
 	echo "$MONITOR" > "$LPATH"/wlanmon.txt
 	echo "$WIRED" > "$LPATH"/eth.txt
-	echo -e ""$YS"Done"$CE""
+	echo -e ""$YS"Pronto"$CE""
 	sleep 1
 	clear
-	echo -e ""$BS"If you want to change it, type "$CE""$YS"interface"$CE""$BS" any time"$CE""
+	echo -e ""$BS"Se você quiser alterar, digite "$CE""$YS"interface"$CE""$BS" a qualquer momento"$CE""
 	sleep 3
 	echo -e "$PAKTC"
 	$READAK	
@@ -457,7 +458,7 @@ function checkifalready
 		if [[ "$CHECKKS" = "$num" ]]
 		then
 			GOOD="0"
-			echo -e ""$RS"This shortcut is already in use by the script."$CE""
+			echo -e ""$RS"Esse atalho já está sendo usado pelo script."$CE""
 			sleep 3
 		fi
 		num=$(( num+1 ))
@@ -467,7 +468,7 @@ function checkifalready
 		if [[ "$CHECKKS" = "etercheck" || "$CHECKKS" = "eternalblue" || "$CHECKKS" = "changelog" || "$CHECKKS" = "wififb" || "$CHECKKS" = "nessusstop" || "$CHECKKS" = "nessusstart" || "$CHECKKS" = "pstop" || "$CHECKKS" = "pstart" || "$CHECKKS" = "astop" || "$CHECKKS" = "astart" || "$CHECKKS" = "settings" || "$CHECKKS" = "donate" || "$CHECKKS" = "d" || "$CHECKKS" = "s" || "$CHECKKS" = "g" || "$CHECKKS" = "l" || "$CHECKKS" = "" || "$CHECKKS" = "if" || "$CHECKKS" = "ifconfig" || "$CHECKKS" = "interfaces" || "$CHECKKS" = "interface" || "$CHECKKS" = "errors" || "$CHECKKS" = "00" || "$CHECKKS" = "exit" || "$CHECKKS" = "update" || "$CHECKKS" = "d1" || "$CHECKKS" = "d2" || "$CHECKKS" = "d3" || "$CHECKKS" = "d4" || "$CHECKKS" = "d5" || "$CHECKKS" = "d6" || "$CHECKKS" = "d7" || "$CHECKKS" = "gg" || "$CHECKKS" = "ks" ]]
 		then
 			GOOD="0"
-			echo -e ""$RS"This shortcut is already in use by the script."$CE""
+			echo -e ""$RS"Esse atalho já está sendo usado pelo script."$CE""
 			sleep 3
 		fi
 	fi
@@ -493,7 +494,7 @@ function checkifalready
 			read KSIFALREADY < "$KSPATH"/"$TITLE"/"$TITLE"ks.txt
 			if [[ "$CHECKKS" == "$KSIFALREADY" ]]
 			then
-				echo -e ""$RS"Shortcut '"$CHECKKS"' is already in use by "$TITLE""$CE""
+				echo -e ""$RS"Atalho '"$CHECKKS"' já está em uso pelo "$TITLE""$CE""
 				GOOD=0
 				sleep 3
 			fi
@@ -512,10 +513,10 @@ then
 	mkdir "$KSPATH"/"$TITLE"
 fi
 clear
-echo -e "Enter the keyboard shortcut that will open "$TITLE" from lscript's main menu"
+echo -e "Digite o atalho do teclado que abrirá "$TITLE" no menu principal do brscript"
 echo -e "(e.g: "$YS""$TITLE""$CE")"
-echo -e "To delete it , type:   "$YS"delete"$CE""
-echo -e ""$YS" b"$CE") Go back"
+echo -e "PAra deletar, digite:   "$YS"delete"$CE""
+echo -e ""$YS" v"$CE") Voltar"
 read CHECKKS
 if [[ "$CHECKKS" = "back" || "$CHECKKS" = "b" ]]
 then
@@ -540,17 +541,17 @@ else
 			echo "$CHECKKS" > "$KSPATH"/"$TITLE"/"$TITLE"ks.txt
 			echo "$NAMECD" > "$KSPATH"/"$TITLE"/"$TITLE".txt
 			echo "$KSSET" > "$KSPATH"/"$TITLE"/"$TITLE"2.txt
-			echo -e "Done!"
+			echo -e "Pronto!"
 			echo -e "$PAKTGB"
 			$READAK
 			clear
 			#break
 		else
 			clear
-			echo -e "Removing shortcut for "$TITLE"..."
+			echo -e "Removendo atalho para "$TITLE"..."
 			rm -r "$KSPATH"/"$TITLE"
 			sleep 1
-			echo -e "Done."
+			echo -e "Pronto"
 			echo -e "$PAKTGB"
 			$READAK
 			clear
@@ -805,7 +806,7 @@ do
 	TERMINALTITLE="INSTALL/REINSTALL A TOOL"
 	dash_calc
 	printf '\033]2;INSTALL/REINSTALL A TOOL\a'
-	echo -e "Select a tool to install/reinstall"
+	echo -e "Selecione uma ferramenta para instalar ou reinstalar"
 	echo -e " "$YS"1"$CE") Fluxion      "$YS"21"$CE") 4nonimizer    "$YS"41"$CE") Infoga           "$YS"61"$CE") Wifi-Pumpkin"
 	echo -e ""$YS" 2"$CE") Wifite       "$YS"22"$CE") Openvas       "$YS"42"$CE") nWatch           "$YS"62"$CE") Veil-Framework"
 	echo -e ""$YS" 3"$CE") Wifiphisher  "$YS"23"$CE") BeeLogger     "$YS"43"$CE") Eternal scanner  "$YS"63"$CE") Leviathan"
@@ -826,9 +827,9 @@ do
 	echo -e ""$YS"18"$CE") Katana       "$YS"38"$CE") CHAOS         "$YS"58"$CE") Empire"
 	echo -e ""$YS"19"$CE") Airgeddon    "$YS"39"$CE") Routersploit  "$YS"59"$CE") Meterpr.-Paranoid"
 	echo -e ""$YS"20"$CE") Websploit    "$YS"40"$CE") Geany         "$YS"60"$CE") Dr0p1t"
-	echo -e ""$YS" b"$CE") Go back"
-	echo -e ""$YS" 0"$CE") Exit"
-	echo -e "Choose: "
+	echo -e ""$YS" b"$CE") Voltar"
+	echo -e ""$YS" 0"$CE") Sair"
+	echo -e "Escolha: "
 	read REIN
 	clear
 	if [[ "$REIN" = "1" ]]
@@ -1087,45 +1088,45 @@ read ERRS
 if [[ "$ERRS" = "1" ]]
 then
 	clear
-	echo -e "Trying to get you some audio..."
+	echo -e "Tentando obter algum áudio ..."
 	sleep 2
 	clear
-	echo -e "Press "$YS"y"$CE" if/when prompted"
+	echo -e "Pressione "$YS"y"$CE" se/quando solicitado"
 	sleep 3
 	clear
-	echo -e "Installing pulseaudio......."
+	echo -e "Instalando pulseaudio......."
 	sleep 1
 	apt-get pulseaudio
-	echo -e "Enabling pulseaudio......."
+	echo -e "Ativando pulseaudio......."
 	sleep 1
 	systemctl --user enable pulseaudio && systemctl --user start pulseaudio
 	clear
-	echo -e "Done!"
+	echo -e "Feito!"
 	sleep 1
 	clear
-	echo -e "I mean...Try to see if you have audio."
+	echo -e "Quero dizer... Tente ver se você possui áudio."
 	sleep 3
 	echo -e " "
-	echo -e "That's all i can do :/"
+	echo -e "Isso é tudo o que posso fazer :/"
 	sleep 2
 	echo -e " "
-	echo -e "If it wasn't fix , then try rebooting"
+	echo -e "Se não foi corrigido, tente reiniciar"
 elif [[ "$ERRS" = "2" ]]
 then
 	clear
-	echo -e "Ok...Lets try to fix this..."
+	echo -e "Ok... Vamos tentar corrigir isso ..."
 	sleep 1
 	mkdir /etc/reaver
-	echo -e "It seems to be fixed."
-	echo -e "Enter you interface"
+	echo -e "Parece que deu certo."
+	echo -e "Digite sua interface"
 	read INTWASH
-	echo -e "Press "$YS"many key"$CE" to test wash"
-	echo -e "Also try "wash -i wlan0mon -a" to display all networks"
+	echo -e "Pressione "$YS"qualquer tecla"$CE" para testar o wash"
+	echo -e "Tente também" wash -i wlan0mon -a" para exibir todas as redes"
 	wash -i $INTWASH
 elif [[ "$ERRS" = "3" ]]
 then
 	apt-get install -y open-vm-tools-desktop fuse
-	echo -e "Restart your vistual machine..."
+	echo -e "Reinicie sua máquina visual..."
 	sleep 2
 	echo -e "$PAKTGB"
 	$READAK
@@ -1134,23 +1135,23 @@ then
 	locale-gen
 	localectl set-locale LANG="en_US.UTF-8"
 	sleep 2
-	echo -e "Reboot your system now"
+	echo -e "Reinicie seu sistema agora"
 	sleep 3
 elif [[ "$ERRS" = "5" ]]
 then
 	service nginx stop
-	echo -e "I think i fixed it. Try again: service apache2 start "
+	echo -e "Eu acho que reparei isso. Tente novamente: service apache2 start "
 	sleep 5
 elif [[ "$ERRS" = "6" ]]
 then
 	echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" > /etc/apt/sources.list
 	rm -r -f /etc/apt/sources.list.d/*
-	echo -e "Try   apt-get update    again. That's all i can do."
+	echo -e "Tente    apt-get update    again. Isso é tudo o que posso fazer."
 	sleep 3
 elif [[ "$ERRS" = "7" ]]
 then
 	rm -f -r /usr/local/lib/python2.7/dist-packages/Crypto
-	echo -e "Error was fixed!"
+	echo -e "O erro foi corrigido!"
 	echo -e "$PAKTGB"
 	$READAK
 elif [[ "$ERRS" = "8" ]]
@@ -1160,7 +1161,7 @@ then
 	apt-get -y remove nginx-common
 	apt-get -y autoremove
 	clear
-	echo -e "Error was fixed!"
+	echo -e "O erro foi corrigido!"
 	echo -e "$PAKTGB"
 	$READAK
 elif [[ "$ERRS" = "back" || "$ERRS" = "b" ]]
@@ -1177,7 +1178,7 @@ then
 	exec bash "$0"
 else
 	clear
-	echo -e "Not an valid option...."
+	echo -e "Não é uma opção válida..."
 	exec bash "$0"
 fi
 }
@@ -1192,18 +1193,18 @@ do
 TERMINALTITLE="KEYBOARD SHORTCUTS"
 dash_calc
 printf '\033]2;KEYBOARD SHORTCUTS\a'
-echo -e ""$YS" 1"$CE") Tools"
-echo -e ""$YS" 2"$CE") See hidden shortcuts"
-echo -e ""$YS" b"$CE") Go back"
+echo -e ""$YS" 1"$CE") Ferramentas"
+echo -e ""$YS" 2"$CE") Ver atalhos ocultos"
+echo -e ""$YS" b"$CE") Voltar"
 #~ echo -e ""$YS"00"$CE") Main menu"
-echo -e ""$YS" 0"$CE") EXIT"
+echo -e ""$YS" 0"$CE") Sair"
 read KS
 clear
 if [[ "$KS" = "1" ]]
 then
 	while true
 	do
-		echo -e "Available shortcuts:                        "$YS"reset"$CE") Delete all shortcuts"
+		echo -e "Atalhos disponíveis:                        "$YS"reset"$CE") Deletar todos os atalhos"
 		nn=1
 		#start sorting out all the available shortcuts
 		HOWADD=$(( HOWMANYTOOLS + 1 )) 
@@ -1242,9 +1243,9 @@ then
 		fi
 		nn=$(( nn+1 ))
 		done
-		echo -e ""$YS" b"$CE") Go back"
+		echo -e ""$YS" b"$CE") Voltar"
 		#echo -e ""$YS" 0"$CE") EXIT"
-		echo -e "Choose: "
+		echo -e "Escolha: "
 		#nn=""
 		read nn
 		clear
@@ -1298,8 +1299,8 @@ dash_calc
 printf '\033]2;MITM\a'
 echo -e ""$YS" 1"$CE") Password sniff-sslstrip"
 echo -e ""$YS" 2"$CE") SET + mitm + dnsspoofing"
-echo -e ""$YS" b"$CE") Go back"
-echo -e ""$YS" 0"$CE") EXIT"
+echo -e ""$YS" b"$CE") Voltar"
+echo -e ""$YS" 0"$CE") Sair"
 read MITMATT
 clear
 if [[ "$MITMATT" = "1" ]]
@@ -1308,35 +1309,35 @@ then
 	do
 	clear
 	echo -e "------------------------------"$RS"MITM"$CE"-------------------------------"
-	echo -e ""$YS" 1"$CE") Enable ip_forward                 "$YS"d1"$CE") Disable ip_forward "
-	echo -e ""$YS" 2"$CE") Set iptables"
-	echo -e ""$YS" 3"$CE") Scan and select target IP         "$YS"33"$CE") I have scaned"
-	echo -e ""$YS" 4"$CE") Open the sslstrip log"            # "$YS"44"$CE") Filter credentials"
-	echo -e ""$YS" b"$CE") Go back"
-	echo -e ""$YS" 0"$CE") EXIT"
-	echo -e "Choose: "
+	echo -e ""$YS" 1"$CE") Ativar ip_forward                 "$YS"d1"$CE") Desativar ip_forward "
+	echo -e ""$YS" 2"$CE") Configurar iptables"
+	echo -e ""$YS" 3"$CE") Escanear e selecionar um alvo IP         "$YS"33"$CE") Eu já escaneei"
+	echo -e ""$YS" 4"$CE") Abrir o log do sslstrip"            # "$YS"44"$CE") Filter credentials"
+	echo -e ""$YS" b"$CE") Voltar"
+	echo -e ""$YS" 0"$CE") Sair"
+	echo -e "Escolha: "
 	read -e MITMCH
 	if [[ "$MITMCH" = "1" ]]
 	then
 		echo "1" > /proc/sys/net/ipv4/ip_forward
-		echo -e "Done."
+		echo -e "Pronto."
 		sleep 1
 	elif [[ "$MITMCH" = "d1" ]]
 	then
 		echo "0" > /proc/sys/net/ipv4/ip_forward
-		echo -e "Done."
+		echo -e "Pronto"
 		sleep 1
 	elif [[ "$MITMCH" = "2" ]]
 	then
 		clear
-		echo -e "Redirect tcp port 80 to port("$YS"Enter"$CE"=8080):"
+		echo -e "Redirecione a porta tcp 80 para a porta("$YS"Digite"$CE"=8080):"
 		read PORTTCP
 		if [[ "$PORTTCP" = "" ]]
 		then
 			PORTTCP="8080"
 		fi
 					clear
-		echo -e "Redirect udp port 40 to port("$YS"Enter"$CE"=40):"
+		echo -e "Redirecione a porta udp 40 para a porta("$YS"Digite"$CE"=40):"
 		read PORTUDP
 		if [[ "$PORTUDP" = "" ]]
 		then
@@ -1346,7 +1347,7 @@ then
 		iptables --flush -t nat
 		iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $PORTTCP
 		iptables -t nat -A PREROUTING -p udp --destination-port 40 -j REDIRECT --to-port $PORTUDP
-		echo -e "Done."
+		echo -e "Pronto."
 		sleep 1
 	elif [[ "$MITMCH" = "3" ]]
 	then
@@ -1354,10 +1355,10 @@ then
 		route -n
 		echo -e ""
 		echo -e ""
-		echo -e "Enter your gateway(prefer "$ETH" gateway):"
+		echo -e "Digite seu gateway(prefira "$ETH" gateway):"
 		read GATENM
 		echo -e ""
-		echo -e "Enter the gateway's interface("$YS"Enter"$CE"="$ETH"):"
+		echo -e "Digite a interface do gateway("$YS"Digite"$CE"="$ETH"):"
 		read GATEINT
 		if [[ "$GATEINT" = "" ]]
 		then
@@ -1369,7 +1370,7 @@ then
 		nmap -sP "$GATENM"/24
 		echo -e ""
 		echo -e ""
-		echo -e "Enter your target IP:"
+		echo -e "Digite o IP do alvo"
 		read TARGIP
 		if [[ "$TARGIP" = "r" ]]
 		then
@@ -1386,7 +1387,7 @@ then
 		export TARGIP
 		export PORTTCP
 		export PORTUDP
-		cd "$LPATH"/ls
+		cd "$LPATH"/
 		gnome-terminal --geometry 60x12+0+999999 -e ./l131.sh
 		gnome-terminal --geometry 60x20+999999+999999 -e ./l133.sh
 		gnome-terminal --geometry 60x20+999999+0 -e ./l132.sh
@@ -1397,17 +1398,17 @@ then
 	elif [[ "$MITMCH" = "33" ]]
 	then
 		clear
-		echo -e "Enter your gateway(prefer "$ETH" gateway):"
+		echo -e "Digite seu gateway(prefira "$ETH" gateway):"
 		read GATENM
 		echo -e ""
-		echo -e "Enter the gateway's interface("$YS"Enter"$CE"="$ETH"):"
+		echo -e "Digite a interface do gateway("$YS"Enter"$CE"="$ETH"):"
 		read GATEINT
 		if [[ "$GATEINT" = "" ]]
 		then
 			GATEINT="$ETH"
 		fi
 		clear
-		echo -e "Enter your target IP("$YS"r"$CE"=rescan):"
+		echo -e "Digite o IP do alvo("$YS"r"$CE"=rescan):"
 		read TARGIP
 		echo -e ""
 		echo -e "$PAKTC"
@@ -1417,7 +1418,7 @@ then
 		export TARGIP
 		export PORTTCP
 		export PORTUDP
-		cd "$LPATH"/ls
+		cd "$LPATH"/
 		gnome-terminal --geometry 60x25+0+999999 -e ./l131.sh
 		gnome-terminal --geometry 60x25+999999+0 -e ./l132.sh
 		gnome-terminal --geometry 60x25+999999+999999 -e ./l133.sh
@@ -1450,36 +1451,36 @@ then
 	do
 	clear
 	echo -e "------------------------------"$RS"MITM"$CE"-------------------------------"
-	echo -e ""$YS" 1"$CE") Enable ip_forward                 "$YS"d1"$CE") Disable ip_forward"
-	echo -e ""$YS" 2"$CE") Scan and select target IP         "$YS"22"$CE") I have scaned"
-	echo -e ""$YS" 3"$CE") Start ARPspoofing"
+	echo -e ""$YS" 1"$CE") Ativar ip_forward                 "$YS"d1"$CE") Disable ip_forward"
+	echo -e ""$YS" 2"$CE") Escanear e selecionar o IP do alvo         "$YS"22"$CE") Eu já escaneei"
+	echo -e ""$YS" 3"$CE") Ativar ARPspoofing"
 	#~ echo -e ""$YS" 4"$CE") Start apache2 service             "$YS"d4"$CE") Stop apache2 service"
-	echo -e ""$YS" 4"$CE") Start SEToolkit"
-	echo -e ""$YS" 5"$CE") Start DNSspoofing"
-	echo -e ""$YS" b"$CE") Go back"
-	echo -e ""$YS" 0"$CE") EXIT"
-	echo -e "Choose: "
+	echo -e ""$YS" 4"$CE") Ativar SEToolkit"
+	echo -e ""$YS" 5"$CE") Ativar DNSspoofing"
+	echo -e ""$YS" b"$CE") Voltar"
+	echo -e ""$YS" 0"$CE") Sair"
+	echo -e "Escolha: "
 	read -e MITMSET
 	clear
 	if [[ "$MITMSET" = "1" ]]
 	then
 		echo "1" > /proc/sys/net/ipv4/ip_forward
-		echo -e "Done."
+		echo -e "Pronto."
 		sleep 1
 	elif [[ "$MITMSET" = "d1" ]]
 	then
 		echo "0" > /proc/sys/net/ipv4/ip_forward
-		echo -e "Done."
+		echo -e "Pronto."
 		sleep 1
 	elif [[ "$MITMSET" = "2" ]]
 	then
 		route -n
 		echo -e ""
 		echo -e ""
-		echo -e "Enter your gateway:"
+		echo -e "Digite seu gateway:"
 		read GATENM
 		echo -e ""
-		echo -e "Enter the gateway's interface(e.g: wlan0):"
+		echo -e "Digite a interface do gateway (por exemplo: wlan0):"
 		read GATEINT
 		while true
 		do		
@@ -1487,7 +1488,7 @@ then
 		nmap -sP "$GATENM"/24
 		echo -e ""
 		echo -e ""
-		echo -e "Enter your target IP("$YS"r"$CE"=rescan):"
+		echo -e "Digite o IP do alvo("$YS"r"$CE"=re-escanear):"
 		read TARGIP
 		if [[ "$TARGIP" = "r" ]]
 		then
@@ -1498,13 +1499,13 @@ then
 		done
 	elif [[ "$MITMSET" = "22" ]]
 	then
-		echo -e "Enter your gateway:"
+		echo -e "Digite seu gateway:"
 		read GATENM
 		echo -e ""
-		echo -e "Enter the gateway's interface(e.g: wlan0):"
+		echo -e "Digite a interface do gateway (por exemplo: wlan0):"
 		read GATEINT
 		clear
-		echo -e "Enter your target IP:"
+		echo -e "Digite o IP do alvo:"
 		read TARGIP
 	elif [[ "$MITMSET" = "3" ]]
 	then
@@ -1512,7 +1513,7 @@ then
 		export GATEINT
 		export TARGIP
 		export GATENM
-		cd "$LPATH"/ls
+		cd "$LPATH"/
 		gnome-terminal --geometry 60x15+999999+0 -e ./l132.sh
 		gnome-terminal --geometry 60x15+999999+999999 -e ./l133.sh
 	#~ elif [[ "$MITMSET" = "4" ]]
@@ -1523,20 +1524,20 @@ then
 		#~ service apache2 stop
 	elif [[ "$MITMSET" = "4" ]]
 	then
-		echo -e "Clone a website to one of the following IP(s):"
+		echo -e "Clone um site para um dos seguintes IP (s)):"
 		ip addr | grep '/24' | awk -F "inet " {'print $2'} | cut -d '/' -f1
 		echo -e "$PAKTC"
 		$READAK
 		gnome-terminal --geometry 66x40+999999+0 -e setoolkit
 	elif [[ "$MITMSET" = "5" ]]
 	then
-		echo -e "Making you a hosts.txt file"
+		echo -e "Faça você um arquivo hosts.txt"
 		echo -e ""
-		echo -e "Enter your IP address that you started the server:"
+		echo -e "Digite seu endereço IP que você iniciou o servidor:"
 		echo -e "One of this/these:"
 		ip addr | grep '/24' | awk -F "inet " {'print $2'} | cut -d '/' -f1
 		read -e SERVIP
-		echo -e "Enter the interface of that IP(e.g: wlan0):"
+		echo -e "Digite a interface desse IP (por exemplo: wlan0):"
 		read -e INTIP
 		if [[ -f ""$LPATH"/HOSTS/hosts.txt" ]]
 		then
@@ -1547,12 +1548,12 @@ then
 		while true
 		do
 		clear
-		echo -e "Enter the URL you want to redirect your IP from(e.g: thisis.myfakesite.com):"
+		echo -e "Digite o URL do qual você deseja redirecionar seu IP (por exemplo: this is.myfakesite.com):"
 		read -e URL
 		echo "$SERVIP	$URL" >> "$LPATH"/HOSTS/hosts.txt
 		sleep 0.2
 		clear
-		echo -e "Add another one as well?"$YNYES""
+		echo -e "Adicionar outro também?"$YNYES""
 		read -e ANOTHERHOST
 		if [[ "$ANOTHERHOST" = "n" ]]
 		then
@@ -1560,7 +1561,7 @@ then
 		fi
 		done
 		clear
-		echo -e "Starting dnsspoof..."
+		echo -e "Ativando dnsspoof..."
 		echo -e "$PAKTC"
 		$READAK
 		export INTIP
@@ -1610,10 +1611,10 @@ do
 	then
 		CORV="crack"
 	fi
-	echo -e "-----------------Basic options-----------------"
-	echo -e ""$YS" 1"$CE") Specify your hash(es)        CURRENT:$HASH"
+	echo -e "-----------------Opções Básicas-----------------"
+	echo -e ""$YS" 1"$CE") Especifique seu hash(es)        CURRENT:$HASH"
 	echo -e ""$YS" 2"$CE") Crack/verify                 CURRENT:$CORV"
-	if [[ -f /root/lscript/hashlog.txt ]]
+	if [[ -f /root/brscript/hashlog.txt ]]
 	then
 		echo -e ""$YS" 3"$CE") View your last log"
 	else
@@ -1787,12 +1788,12 @@ do
 		fi
 	elif [[ "$DAGON" = 3 ]]
 	then
-		if [[ ! -f /root/lscript/hashlog.txt ]]
+		if [[ ! -f /root/brscript/hashlog.txt ]]
 		then
 			echo -e ""$RS"No log found."$CE""
 			sleep 2
 		else
-			cat /root/lscript/hashlog.txt
+			cat /root/brscript/hashlog.txt
 			echo -e "$PAKTGB"
 			$READAK
 		fi
@@ -1963,25 +1964,25 @@ function eaphammer_automation
 						EAPHWORD="OFF"
 					fi
 				fi
-				echo -e ""$YS" 1"$CE") Create a new RADIUS cert for your AP"
-				echo -e ""$YS" 2"$CE") Set your interface for the AP               CURRENT: $EAPHIFACE"
-				echo -e ""$YS" 3"$CE") Specify access point ESSID                  CURRENT: $EAPHESSID"
-				echo -e ""$YS" 4"$CE") Specify access point BSSID                  CURRENT: $EAPHBSSID"
-				echo -e ""$YS" 5"$CE") Specify access point channel                CURRENT: $EAPHCHANNEL"
-				echo -e ""$YS" 6"$CE") Specify WPA type                            CURRENT: $EAPHWPA"
-				echo -e ""$YS" 7"$CE") Specify auth type                           CURRENT: $EAPHAUTH"
-				echo -e ""$YS" 8"$CE") Harvest EAP creds                           CURRENT: $EAPHCREDS"
-				echo -e ""$YS" 9"$CE") Force clients to connect to hostile portal  CURRENT: $EAPHHOSTILE"
-				echo -e ""$YS"10"$CE") Force clients to connect to captive portal  CURRENT: $EAPHCAPTIVE"
-				echo -e ""$YS"11"$CE") Perform an indirect wireless pivot          CURRENT: $EAPHPIVOT"
-				echo -e ""$YS"12"$CE") Enable karma                                CURRENT: $EAPHKARMA"
-				echo -e ""$YS"13"$CE") Use autocrack/add with remote cracking rig  CURRENT: $EAPHAIRCRACK"
-				echo -e ""$YS"14"$CE") Use internal autocrack                      CURRENT: $EAPHINTAUTO"
-				echo -e ""$YS"15"$CE") Specify wordlist for autocrack              CURRENT: $EAPHWORD"
-				echo -e ""$YS"start"$CE") Start "
-				echo -e ""$YS"00"$CE") Main menu"
-				echo -e ""$YS" back"$CE") Go back"
-				echo -e "Choose: "
+				echo -e ""$YS" 1"$CE") Crie um novo cert RADIUS para o seu AP"
+				echo -e ""$YS" 2"$CE") Defina sua interface para o AP                        CURRENT: $EAPHIFACE"
+				echo -e ""$YS" 3"$CE") Especifique o ponto de acesso ESSID                   CURRENT: $EAPHESSID"
+				echo -e ""$YS" 4"$CE") Especificar ponto de acesso BSSID                     CURRENT: $EAPHBSSID"
+				echo -e ""$YS" 5"$CE") Especificar o canal do ponto de acesso                CURRENT: $EAPHCHANNEL"
+				echo -e ""$YS" 6"$CE") Especifique o tipo WPA                                CURRENT: $EAPHWPA"
+				echo -e ""$YS" 7"$CE") Especifique o tipo de autenticação                    CURRENT: $EAPHAUTH"
+				echo -e ""$YS" 8"$CE") Receba os credores do EAP                             CURRENT: $EAPHCREDS"
+				echo -e ""$YS" 9"$CE") Forçar clientes a se conectar ao portal hostil        CURRENT: $EAPHHOSTILE"
+				echo -e ""$YS"10"$CE") Forçar clientes a se conectar ao portal cativo        CURRENT: $EAPHCAPTIVE"
+				echo -e ""$YS"11"$CE") Execute um pivô indireto indireto                     CURRENT: $EAPHPIVOT"
+				echo -e ""$YS"12"$CE") Ativar karma                                          CURRENT: $EAPHKARMA"
+				echo -e ""$YS"13"$CE") Use autocrack/add com equipamento de cracking remoto  CURRENT: $EAPHAIRCRACK"
+				echo -e ""$YS"14"$CE") Usar autocrack interno                                CURRENT: $EAPHINTAUTO"
+				echo -e ""$YS"15"$CE") Especifique a lista de palavras para autocrack        CURRENT: $EAPHWORD"
+				echo -e ""$YS"start"$CE") Iniciar "
+				echo -e ""$YS"00"$CE") Menu principal"
+				echo -e ""$YS" back"$CE") Voltar"
+				echo -e "Escolha: "
 				read EAPH
 				clear
 				if [[ "$EAPH" = 1 ]]
@@ -1990,19 +1991,19 @@ function eaphammer_automation
 					./eaphammer --cert-wizard
 				elif [[ "$EAPH" = 2 ]]
 				then
-					echo -e "Type the interface you want to use: "
+					echo -e "Digite a interface que deseja usar: "
 					read EAPHIFACE
 				elif [[ "$EAPH" = 3 ]]
 				then
-					echo -e "Type the ESSID: "
+					echo -e "Digite o ESSID: "
 					read EAPHESSID
 				elif [[ "$EAPH" = 4 ]]
 				then
-					echo -e "Type the BSSID: "
+					echo -e "Digite o BSSID: "
 					read EAPHBSSID
 				elif [[ "$EAPH" = 5 ]]
 				then
-					echo -e "Type the channel: "
+					echo -e "Digite o canal: "
 					read EAPHCHANNEL
 				elif [[ "$EAPH" = 6 ]]
 				then
@@ -2017,7 +2018,7 @@ function eaphammer_automation
 					echo -e ""$YS" 1"$CE") Open"
 					echo -e ""$YS" 2"$CE") ttls"
 					echo -e ""$YS" 3"$CE") peap"
-					echo -e "Choose: "
+					echo -e "Escolha: "
 					read PAUTH
 					if [[ "$PAUTH" = 1 ]]
 					then
@@ -2118,13 +2119,13 @@ function eaphammer_automation
 					clear
 					if [[ "$OK1" != 1 ]]
 					then
-						echo -e "You haven't specified the important requirements"
+						echo -e "Você não especificou os requisitos importantes"
 						sleep 4
 						continue
 					fi
 					if [[ "$OK2" != 1 ]]
 					then
-						echo -e "You haven't specified a wordlist for the autocrack"
+						echo -e "Você não especificou uma lista de palavras para o autocrack"
 						sleep 4
 						continue
 					fi
@@ -2273,30 +2274,30 @@ do
 	then
 		BANN="OFF"
 	fi
-	echo -e ""$YS" 1"$CE") Malware URL                          CURRENT:$MALURL"
-	echo -e ""$YS" 2"$CE") Malware to startup                   CURRENT:$STARTUP"
-	echo -e ""$YS" 3"$CE") Malware to task scheduler            CURRENT:$TASK"
-	echo -e ""$YS" 4"$CE") Add link to powershell user profile  CURRENT:$LTPUP"
-	echo -e ""$YS" 5"$CE") Kill antivirus before malware        CURRENT:$KILLANT"
-	echo -e ""$YS" 6"$CE") Run batch script before malware      CURRENT:$RUNBAT"
-	echo -e ""$YS" 7"$CE") Run powershell script before malware CURRENT:$RUNPOW"
-	echo -e ""$YS" 8"$CE") Run vbs script before malware        CURRENT:$RUNVBS"
-	echo -e ""$YS" 9"$CE") Bypass UAC and run malware as admin  CURRENT:$UACASADMIN"
-	echo -e ""$YS"10"$CE") Spoof final file to an extension     CURRENT:$SPOOFEXT"
-	echo -e ""$YS"11"$CE") Malware is zip compressed            CURRENT:$ISZIP"
-	echo -e ""$YS"12"$CE") Compress the final file with UPX     CURRENT:$COMPRESS"
-	echo -e ""$YS"13"$CE") Try to disable UAC on victim device  CURRENT:$DISUAC"
-	echo -e ""$YS"14"$CE") Use icon to the final file           CURRENT:$ICON"
-	echo -e ""$YS"15"$CE") Don't clean target's event log       CURRENT:$EVENT"
-	echo -e ""$YS"16"$CE") Don't compile the final file         CURRENT:$COMPILE"
-	echo -e ""$YS"17"$CE") Download malware for 32 bit only     CURRENT:$D32"
-	echo -e ""$YS"18"$CE") Download malware for 64 bit only     CURRENT:$D64"
-	echo -e ""$YS"19"$CE") Stay quite(no banner)                CURRENT:$BANN"
-	echo -e ""$YS" o"$CE") Open output folder"
-	echo -e ""$YS" u"$CE") Check for updates"
-	echo -e ""$YS" b"$CE") Go back"
-	echo -e ""$YS"start"$CE") Generate"
-	echo -e "Choose: "
+	echo -e ""$YS" 1"$CE") URL de malware                          CURRENT:$MALURL"
+	echo -e ""$YS" 2"$CE") Malware para iniciar                   CURRENT:$STARTUP"
+	echo -e ""$YS" 3"$CE") Malware para agendador de tarefas            CURRENT:$TASK"
+	echo -e ""$YS" 4"$CE") Adicionar link ao perfil do usuário do powershell  CURRENT:$LTPUP"
+	echo -e ""$YS" 5"$CE") Mate o antivírus antes do malware        CURRENT:$KILLANT"
+	echo -e ""$YS" 6"$CE") Execute o script em lote antes do malware      CURRENT:$RUNBAT"
+	echo -e ""$YS" 7"$CE") Execute o script do powershell antes do malware CURRENT:$RUNPOW"
+	echo -e ""$YS" 8"$CE") Execute o script vbs antes do malware      CURRENT:$RUNVBS"
+	echo -e ""$YS" 9"$CE") Bypass UAC e execute malware como administrador  CURRENT:$UACASADMIN"
+	echo -e ""$YS"10"$CE") Spoof arquivo final para uma extensão    CURRENT:$SPOOFEXT"
+	echo -e ""$YS"11"$CE") Malware é zip comprimido           CURRENT:$ISZIP"
+	echo -e ""$YS"12"$CE") Comprima o arquivo final com UPX     CURRENT:$COMPRESS"
+	echo -e ""$YS"13"$CE") Tente desativar o UAC no dispositivo da vítima CURRENT:$DISUAC"
+	echo -e ""$YS"14"$CE") Use o ícone para o arquivo final           CURRENT:$ICON"
+	echo -e ""$YS"15"$CE") Não limpe o registro de eventos do alvo      CURRENT:$EVENT"
+	echo -e ""$YS"16"$CE") Não compile o arquivo final         CURRENT:$COMPILE"
+	echo -e ""$YS"17"$CE") Baixe malware apenas para 32 bits    CURRENT:$D32"
+	echo -e ""$YS"18"$CE") Baixe malware apenas para 64 bits     CURRENT:$D64"
+	echo -e ""$YS"19"$CE") Fique bem (sem bandeira)               CURRENT:$BANN"
+	echo -e ""$YS" o"$CE") Abrir pasta de saída"
+	echo -e ""$YS" u"$CE") Verifique atualizações"
+	echo -e ""$YS" b"$CE") Voltar"
+	echo -e ""$YS"start"$CE") Gerar"
+	echo -e "Escolha: "
 	read DR
 	clear
 	if [[ "$DR" = "o" ]]
@@ -5327,7 +5328,7 @@ function metasploit_menu
 	fi
 	done
 }
-function update_lscript
+function update_brscript
 {
 	echo -e "Checking for updates..."
 	TESTINTERNETCONNECTION=$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')
@@ -5348,17 +5349,17 @@ function update_lscript
 			if [[ "$UPDATEYN" = "y" ]]
 			then
 				clear
-				#~ echo -e "Making new directory for the old lscript (will pass it to /root/lscriptold)"
+				#~ echo -e "Making new directory for the old brscript (will pass it to /root/brscriptold)"
 				sleep 1
-				if [[ -d /root/lscriptold ]]
+				if [[ -d /root/brscriptold ]]
 				then
-					rm -r /root/lscriptold
+					rm -r /root/brscriptold
 				fi
-				mkdir /root/lscriptold
+				mkdir /root/brscriptold
 				echo -e ""
-				#~ echo -e "Moving lscript to lscriptold"
+				#~ echo -e "Moving brscript to brscriptold"
 				sleep 1
-				mv "$LPATH" /root/lscriptold
+				mv "$LPATH" /root/brscriptold
 				#~ echo -e "Cloning the latest github version to new "$LPATH""
 				sleep 1
 				cd
@@ -5367,35 +5368,35 @@ function update_lscript
 				chmod +x install.sh
 				clear
 				sleep 1
-				if [[ -f /root/lscriptold/lscript/IAGREE.txt ]]
+				if [[ -f /root/brscriptold/brscript/IAGREE.txt ]]
 				then
-					cp /root/lscriptold/lscript/IAGREE.txt "$LPATH"
+					cp /root/brscriptold/brscript/IAGREE.txt "$LPATH"
 				fi
-				if [[ -d /root/lscriptold/lscript/ks ]]
+				if [[ -d /root/brscriptold/brscript/ks ]]
 				then
 					echo -e "Copying your shortcuts"
-					cp -r /root/lscriptold/lscript/ks "$LPATH"
+					cp -r /root/brscriptold/brscript/ks "$LPATH"
 					echo -e "Done."
 					sleep 0.2
 				fi
-				if [[ -d /root/lscriptold/lscript/settings ]]
+				if [[ -d /root/brscriptold/brscript/settings ]]
 				then
 					echo -e "Copying your settings"
-					cp -r /root/lscriptold/lscript/settings "$LPATH"
+					cp -r /root/brscriptold/brscript/settings "$LPATH"
 					echo -e "Done."
 					sleep 0.2
 				fi
-				if [[ -f /root/lscriptold/lscript/wlanmon.txt ]]
+				if [[ -f /root/brscriptold/brscript/wlanmon.txt ]]
 				then
 					echo -e "Copying your interfaces"
-					cp /root/lscriptold/lscript/wlanmon.txt "$LPATH"
+					cp /root/brscriptold/brscript/wlanmon.txt "$LPATH"
 					echo -e "Done."
 					sleep 0.2
 				fi
 				echo -e ""
-				if [[ -f /root/lscriptold/lscript/wlan.txt ]]
+				if [[ -f /root/brscriptold/brscript/wlan.txt ]]
 				then
-					cp /root/lscriptold/lscript/wlan.txt "$LPATH"
+					cp /root/brscriptold/brscript/wlan.txt "$LPATH"
 					echo -e "Done."
 					sleep 0.2
 					clear
@@ -5406,7 +5407,7 @@ function update_lscript
 				gnome-terminal -e ./install.sh
 				clear 
 				sleep 1
-				rm -rf /root/lscriptold
+				rm -rf /root/brscriptold
 				echo -e "Exiting..."
 				sleep 1
 				kill -9 $PPID
@@ -5448,7 +5449,7 @@ function hidden_shortcuts
 	echo -e ""$YS"     wififb"$CE") Create open wifi access point and get fb passwords with wifiphisher"
 	echo -e ""$YS"eternalblue"$CE") Launch msfconsole with eternalblue exploit on target"
 	echo -e ""$YS"  etercheck"$CE") Check if a target is vulnerable to eternalblue exploit"
-	echo -e ""$YS"  changelog"$CE") View the changelog of the lscript versions"
+	echo -e ""$YS"  changelog"$CE") View the changelog of the brscript versions"
 	echo -e ""$YS"     pstart"$CE") Service postgresql start"
 	echo -e ""$YS"      pstop"$CE") Service postgresql stop"
 	echo -e ""$YS"     nstart"$CE") Service network-manager start"
@@ -5756,23 +5757,23 @@ while true
 do
 	sm=0
 	clear
-	if [[ ! -d /bin/lscript/smtp ]]
+	if [[ ! -d /bin/brscript/smtp ]]
 	then
-		mkdir /bin/lscript/smtp
+		mkdir /bin/brscript/smtp
 	fi
 	echo -e ""$RS"YOU SHOULD FIRST SIGN UP ON https://www.smtp2go.com AND VERIFY YOUR EMAIL."$CE""
 	echo -e ""$RS"THEN GO TO https://app.smtp2go.com/settings/users AND MAKE A USERNAME AND PASS."$CE""
 	echo -e ""$RS"      ########ALWAYS HAVE PERMISSION OF THE EMAILS YOU SPOOF########"$CE""
 	echo -e ""$RS"      ########DONT SEND VIRUSES , PHISHING OR ILLEGAL THINGS########"$CE""
-	if [[ ! -f /bin/lscript/smtp/smtpemail.txt ]]
+	if [[ ! -f /bin/brscript/smtp/smtpemail.txt ]]
 	then
 		echo -e ""$YS" 1"$CE") Set your SMTP username and pass     "$RS"NOT SET"$CE""
 	else
-		read smtpemail < /bin/lscript/smtp/smtpemail.txt
+		read smtpemail < /bin/brscript/smtp/smtpemail.txt
 		echo -e ""$YS" 1"$CE") Set your SMTP username and pass     Current: "$YS""$smtpemail""$CE""
 	fi
 	echo -e ""$YS" 2"$CE") Send a spoofed email"
-	echo -e ""$YS" 3"$CE") Clear your SMTP username and pass from lscript"
+	echo -e ""$YS" 3"$CE") Clear your SMTP username and pass from brscript"
 	echo -e ""$YS" 4"$CE") Fix email failed"
 	echo -e ""$YS" b"$CE") Go back"
 	echo -e ""$YS" 0"$CE") EXIT"
@@ -5785,9 +5786,9 @@ do
 		echo -e "Enter your smtp password(find it here: https://app.smtp2go.com/settings/users ): "
 		read SMTPPASS
 		clear
-		echo "$SMTPEMAIL" > /bin/lscript/smtp/smtpemail.txt
-		echo "$SMTPPASS" > /bin/lscript/smtp/smtppass.txt 
-		echo -e "Credentials saved on /bin/lscript/smtp"
+		echo "$SMTPEMAIL" > /bin/brscript/smtp/smtpemail.txt
+		echo "$SMTPPASS" > /bin/brscript/smtp/smtppass.txt 
+		echo -e "Credentials saved on /bin/brscript/smtp"
 		sleep 3
 	elif [[ "$SMTP" = "4" ]]
 	then
@@ -5798,16 +5799,16 @@ do
 		read -e -n 1 -r
 	elif [[ "$SMTP" = "3" ]]
 	then
-		if [[ -f /bin/lscript/smtp/smtpemail.txt ]]
+		if [[ -f /bin/brscript/smtp/smtpemail.txt ]]
 		then
-			rm /bin/lscript/smtp/smtpemail.txt
+			rm /bin/brscript/smtp/smtpemail.txt
 			echo -e "Username removed"
 		else
 			echo -e "Not username found"
 		fi
-		if [[ -f /bin/lscript/smtp/smtppass.txt ]]
+		if [[ -f /bin/brscript/smtp/smtppass.txt ]]
 		then
-			rm /bin/lscript/smtp/smtppass.txt
+			rm /bin/brscript/smtp/smtppass.txt
 			echo -e "Password removed"
 		else
 			echo -e "Not password found"
@@ -5827,12 +5828,12 @@ do
 		while true
 		do
 		clear
-		if [[ ! -f /bin/lscript/smtp/smtpemail.txt ]]
+		if [[ ! -f /bin/brscript/smtp/smtpemail.txt ]]
 		then
 			echo -e "No smtp username found."
 			sm=1
 		fi
-		if [[ ! -f /bin/lscript/smtp/smtppass.txt ]]
+		if [[ ! -f /bin/brscript/smtp/smtppass.txt ]]
 		then
 			echo -e "No smtp pass found."
 			sm=1
@@ -5841,8 +5842,8 @@ do
 		then
 			break
 		fi
-		read smtppass < /bin/lscript/smtp/smtppass.txt
-		read smtpemail < /bin/lscript/smtp/smtpemail.txt
+		read smtppass < /bin/brscript/smtp/smtppass.txt
+		read smtpemail < /bin/brscript/smtp/smtpemail.txt
 		clear
 		echo -e "Your username is "$RS""$smtpemail""$CE""
 		echo -e ""
@@ -5914,7 +5915,7 @@ function new_terminal
 				sleep 1
 				FJC=0
 				export FJC
-				gnome-terminal --geometry 87x35+9999+0 -- lh1
+				gnome-terminal --geometry 87x35+9999+0 -- br1
 				sleep 1
 				exec bash "$0"
 				break
@@ -5923,7 +5924,7 @@ function new_terminal
 				clear
 				echo -e "Moving into new terminal..."
 				sleep 1
-				gnome-terminal --geometry 80x25+9999+0 -- lh3
+				gnome-terminal --geometry 80x25+9999+0 -- br3
 				sleep 1
 				exec bash "$0"
 				break
@@ -5931,7 +5932,7 @@ function new_terminal
 			then
 				echo -e "Moving into new terminal..."
 				sleep 1
-				gnome-terminal --geometry 80x25+9999+0 -- lh4
+				gnome-terminal --geometry 80x25+9999+0 -- br4
 				sleep 1
 				exec bash "$0"
 				break
@@ -6138,7 +6139,7 @@ function donate_option
 	dash_calc
 	printf '\033]2;DONATION\a'
 	echo -e "If you found my script useful, you can buy me a coffee :)"
-	echo -e "Total lscript donations: $DONATIONS"
+	echo -e "Total brscript donations: $DONATIONS"
 	echo -e ""$YS" 1"$CE") Open browser to donate"
 	echo -e ""$YS" 2"$CE") Copy donation link"
 	echo -e ""$YS" b"$CE") I don't care about your work! :P"
@@ -6191,7 +6192,7 @@ function ngrok_option
 				echo -e "   Go to https://ngrok.com and choose "$YS"sign up"$CE"."
 				echo -e "   When that's done, copy the given "$YS"authtoken"$CE"."
 				echo -e "   (If you can't find it go to: https://dashboard.ngrok.com/auth )"
-				echo -e "   Then select the 'set your authtoken' option in lscript, and paste it."
+				echo -e "   Then select the 'set your authtoken' option in brscript, and paste it."
 				echo -e "---to make a reverse tcp payload:"
 				echo -e "   You need to set the payload to: windows/meterpreter/reverse_tcp_dns"
 				echo -e "$PAKTGB"
@@ -7229,7 +7230,7 @@ function main_options
 		exec bash "$0"
 	elif [[ "$YORNAA" = "gg" ]]
 	then
-		geany /bin/lscript/l
+		geany /bin/brscript/l
 	elif [[ "$YORNAA" = "1" ]]
 	then
 		enable_wlan
@@ -7407,7 +7408,7 @@ function main_options
 	then
 		printf '\033]2;UPDATE\a'
 		clear
-		update_lscript
+		update_brscript
 	elif [[ "$YORNAA" = "if" || "$YORNAA" = "ifconfig" ]]
 	then
 		ifconfig
