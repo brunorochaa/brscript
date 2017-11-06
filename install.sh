@@ -30,13 +30,13 @@ chmod +x /root/brscript/br4
 chmod +x /root/brscript/br41
 chmod +x /root/brscript/br42
 chmod +x /root/brscript/br43
-chmod +x /root/brscript/bl131.sh
+chmod +x /root/brscript/b131.sh
 chmod +x /root/brscript/b132.sh
 chmod +x /root/brscript/b133.sh
 chmod +x /root/brscript/uninstall.sh
 echo -e "Copiando o script para /bin"
 sleep 1
-cd /root/bscript
+cd /root/brscript
 cp /root/brscript/b /bin/
 cp /root/brscript/br1 /bin/
 cp /root/brscript/br2 /bin/
