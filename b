@@ -255,8 +255,8 @@ function banner
 {
 	check_wlans
 	echo -e ""
-	echo -e "$COL       ____  ____                _       _     $CE"
-	echo -e "$COL      | __ )|  _ \ ___  ___ _ __(_)_ __ | |_   $CE"
+	echo -e "$COL   ____  ____                _       _     $CE"
+	echo -e "$COL  | __ )|  _ \ ___  ___ _ __(_)_ __ | |_   $CE"
     echo -e "$COL THE  |  _ \| |_) / __|/ __| '__| | '_ \| __|  $CE"
     echo -e "$COL      | |_) |  _ <\__ \ (__| |  | | |_) | |_   $CE"
     echo -e "$COL      |____/|_| \_\___/\___|_|  |_| .__/ \__|  $CE"
